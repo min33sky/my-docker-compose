@@ -1,11 +1,14 @@
-version: '3.7'
+version: '3.8'
 services:
-  mongodb_container:
-    image: mongo:latest
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: always
     ports:
       - 27017:27017
     volumes:
-      - mongodb_data_container:/data/db
-
-volumes:
-  mongodb_data_container:
+      - ./mongodb:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=1234
+      - MONGO_INITDB_DATABASE=mydb
